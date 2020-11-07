@@ -11,6 +11,8 @@
 <h2>Index</h2>
 <br><br>
 <a href="reg">Register here</a>
+&nbsp;&nbsp;
+<a href="login">Login</a>
 </div>
 </body>
 </html>
