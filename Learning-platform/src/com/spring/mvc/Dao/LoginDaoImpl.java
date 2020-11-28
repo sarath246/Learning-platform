@@ -36,8 +36,6 @@ public class LoginDaoImpl implements LoginDao {
 	@Override
 	public boolean checkLogin(String email, String psw) {
 
-		System.out.println("Checking login...");
-		
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
@@ -54,7 +52,6 @@ public class LoginDaoImpl implements LoginDao {
 			@SuppressWarnings("unchecked")
 			List<Login> list = query.getResultList();
 			
-			System.out.println("List :" + list);
 			
 			if ((list != null) && (list.size()>0)) {
 				
@@ -66,7 +63,7 @@ public class LoginDaoImpl implements LoginDao {
 			
 		} catch (Exception e) {
 
-			e.printStackTrace();
+			System.out.println("Exceptions :" + e);
 			return false;
 		}
 		

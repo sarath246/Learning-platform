@@ -15,15 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.mvc.entity.Register;
-import com.spring.mvc.service.Service;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.spring.mvc.service.ServiceLogin;
+import com.spring.mvc.service.ServiceRegister;
 
 @Controller
 public class RegisterController {
 	
-	@Autowired
-	private Service service;
+	//@Autowired
+	//private Service service;
 	
+	@Autowired
+	private ServiceRegister serviceRegister;
+	
+	@Autowired
+	private ServiceLogin serviceLogin;
 
 	@GetMapping(value = "/reg")
 	public String registerForm(Model model) {
@@ -38,22 +43,7 @@ public class RegisterController {
 	@PostMapping(value = "/save")
 	public String saveData(@Valid @ModelAttribute("regUser") Register register, Errors errors, @RequestParam("lname") String lname, @RequestParam("fname") String fname , @RequestParam("email") String email, @RequestParam("psw") String psw, Model model, HttpServletRequest request, BindingResult bindingResult) {
 	
-		int i = 0;
-		
-		while (i < 5) {
-			
-		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
-		String hashedPassword = passwordEncoder.encode(psw);
-		System.out.println("password :" + hashedPassword);
-		i++;
-		}
-		
-		boolean chechUser = service.getEmail(register.getEmail());
-		
-		System.out.println("Email id :" + chechUser);
-	
+		boolean chechUser = serviceLogin.getEmail(register.getEmail());
 		
 		if (errors.hasErrors()) {
 			
@@ -62,8 +52,6 @@ public class RegisterController {
 		
 		
 		if (chechUser) {
-			
-			System.out.println("the user is exist...");
 			
 			bindingResult.rejectValue("email",  "error.idOutOfRange", "the email is already exist");
 			
@@ -74,7 +62,7 @@ public class RegisterController {
 		if (fname.matches("[0-9]+")) {
 			
 			bindingResult.rejectValue("fname", "error.idOutOfRange", "Characters only");
-			
+				
 			return "register-form";
 		}
 		
@@ -93,9 +81,10 @@ public class RegisterController {
 			return "register-form";
 		}
 	
-		// save the customer using our service
-		service.saveRegister(register);
 		
+		// save the customer using our service
+		//service.saveRegister(register);
+		serviceRegister.saveRegister(register);
 		
 		return "register-success";
 		

@@ -8,20 +8,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.mvc.entity.Login;
-import com.spring.mvc.service.Service;
+import com.spring.mvc.service.ServiceLogin;
 
 @Controller
 public class LoginController {
 
+	//@Autowired
+	//private Service service;
+
 	@Autowired
-	private Service service;
+	private ServiceLogin serviceLogin;
 	
-	@GetMapping(value = "/loginShow")
+	//@GetMapping(value = "/loginShow")
+	@RequestMapping(value = "/loginShow", method = {RequestMethod.GET, RequestMethod.POST})
 	public String loginPage(Model model) {
 		
 		model.addAttribute("login", new Login());
@@ -30,17 +36,19 @@ public class LoginController {
 	}
 
 	@PostMapping(value = "/loginAction")
-	public String loginToUserHome(@Valid @ModelAttribute("login") Login login, Errors errors, Model model, HttpServletRequest request, BindingResult bindingResult) {
+	public String loginToUserHome(@Valid @ModelAttribute("login") Login login, Errors errors, Model model, HttpServletRequest request, BindingResult bindingResult,
+												@RequestParam("email") String email, @RequestParam("psw") String psw) {
 	
 		
 		if (errors.hasErrors()) {
 			
 			return "login";
+		
 		}
 		
-
-		boolean userExist = service.checkLogin(login.getEmail(), login.getPsw());
-
+		boolean userExist = serviceLogin.checkLogin(login.getEmail(), login.getPsw());
+	
+		
 		if (userExist) {
 			
 			model.addAttribute("fname", login.getEmail());

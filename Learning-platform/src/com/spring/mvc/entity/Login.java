@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+
 @Entity
 @Table(name = "tbl_register")
 public class Login {
@@ -18,11 +19,11 @@ public class Login {
 	@Column(name = "id")
 	private Long id;
 	
-	@NotBlank(message = "Required!")
+	@NotBlank(message = "Enter Email!")
 	@Column(name = "email")
 	private String email;
 	
-	@NotBlank(message = "Required!")
+	@NotBlank(message = "Enter Password!")
 	@Column(name = "password")
 	private String psw;
 	

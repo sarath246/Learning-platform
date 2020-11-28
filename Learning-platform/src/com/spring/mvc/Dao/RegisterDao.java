@@ -1,5 +1,6 @@
 package com.spring.mvc.Dao;
 
+
 import java.util.List;
 
 import com.spring.mvc.entity.Register;
@@ -14,3 +15,4 @@ public interface RegisterDao {
 	public boolean getEmail(String email);
 	
 }
+ 

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.mvc.entity.Register;
 
+
+
 @Repository
 public class RegisterDaoImpl implements RegisterDao {
 
@@ -28,18 +30,14 @@ public class RegisterDaoImpl implements RegisterDao {
 
 		try {
 
-			
-			System.out.println("Saving details...");
-			
+					
 			// save the customer
 			session.save(register);
-			
-			System.out.println("Success...");
 
 			
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			System.out.println("Exceptions :" + e);
 		}
 	}
 
@@ -51,8 +49,6 @@ public class RegisterDaoImpl implements RegisterDao {
 		
 		try {
 
-			
-			System.out.println("Fetching username and password...");
 			
 			//Query<Register> regQuery = session.createQuery("from tbl_register reg where reg.username=:username and reg.password=:password", Register.class);
 			
@@ -76,13 +72,13 @@ public class RegisterDaoImpl implements RegisterDao {
 	@Transactional
 	public boolean getEmail(String email) {
 
+		
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			
-			boolean userExists = false;
 			
-			System.out.println("Fetching email...");
+			boolean userExists = false;
 			
 			String sqlQuery = "from Register as o where o.email=?";
 			
@@ -92,6 +88,7 @@ public class RegisterDaoImpl implements RegisterDao {
 			
 			@SuppressWarnings("unchecked")
 			List<Register> list = query.getResultList();
+		
 			
 			if ((list != null) && (list.size()>0)) {
 				
@@ -102,7 +99,7 @@ public class RegisterDaoImpl implements RegisterDao {
 			
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			System.out.println("Exceptions :" + e);
 			return false;
 		}
 		
