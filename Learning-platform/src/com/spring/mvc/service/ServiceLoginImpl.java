@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.mvc.Dao.LoginDao;
 import com.spring.mvc.Dao.RegisterDao;
+import com.spring.mvc.Dao.RegisterDaoImpl;
 
 @Service
 public class ServiceLoginImpl implements ServiceLogin {

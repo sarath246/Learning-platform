@@ -14,8 +14,6 @@ import com.spring.mvc.entity.ChangePassword;
 @Controller
 public class ChangePswController {
 
-	//@Autowired
-	//private Service service;
 	
 	@GetMapping(value = "/changePassword")
 	public String changePassword(Model model) {
@@ -35,7 +33,6 @@ public class ChangePswController {
 			return "changePassword";
 		}
 		else {
-			//service.updatePassword(changePassword);
 			
 		return "pasword-change-success";
 		}

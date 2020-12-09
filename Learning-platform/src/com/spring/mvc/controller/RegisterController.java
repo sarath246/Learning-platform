@@ -21,8 +21,6 @@ import com.spring.mvc.service.ServiceRegister;
 @Controller
 public class RegisterController {
 	
-	//@Autowired
-	//private Service service;
 	
 	@Autowired
 	private ServiceRegister serviceRegister;
@@ -43,14 +41,15 @@ public class RegisterController {
 	@PostMapping(value = "/save")
 	public String saveData(@Valid @ModelAttribute("regUser") Register register, Errors errors, @RequestParam("lname") String lname, @RequestParam("fname") String fname , @RequestParam("email") String email, @RequestParam("psw") String psw, Model model, HttpServletRequest request, BindingResult bindingResult) {
 	
+		Long startTime = System.nanoTime();
+	
 		boolean chechUser = serviceLogin.getEmail(register.getEmail());
 		
 		if (errors.hasErrors()) {
 			
 			return "register-form";
 		}
-		
-		
+			
 		if (chechUser) {
 			
 			bindingResult.rejectValue("email",  "error.idOutOfRange", "the email is already exist");
@@ -58,14 +57,12 @@ public class RegisterController {
 			return "register-form";
 		}
 		
-		
 		if (fname.matches("[0-9]+")) {
 			
 			bindingResult.rejectValue("fname", "error.idOutOfRange", "Characters only");
 				
 			return "register-form";
 		}
-		
 		
 		if (lname.matches("[0-9]+")) {
 			
@@ -81,12 +78,15 @@ public class RegisterController {
 			return "register-form";
 		}
 	
-		
 		// save the customer using our service
 		//service.saveRegister(register);
 		serviceRegister.saveRegister(register);
 		
-		return "register-success";
+		Long elapsedTime = System.nanoTime()-startTime;
+		
+		System.out.println("Total time taken :" + elapsedTime/100000000);
+		
+		return "register-success";	
 		
 	}
 	

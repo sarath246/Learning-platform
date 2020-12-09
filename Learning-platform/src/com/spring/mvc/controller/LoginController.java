@@ -20,13 +20,10 @@ import com.spring.mvc.service.ServiceLogin;
 @Controller
 public class LoginController {
 
-	//@Autowired
-	//private Service service;
 
 	@Autowired
 	private ServiceLogin serviceLogin;
 	
-	//@GetMapping(value = "/loginShow")
 	@RequestMapping(value = "/loginShow", method = {RequestMethod.GET, RequestMethod.POST})
 	public String loginPage(Model model) {
 		
@@ -37,18 +34,16 @@ public class LoginController {
 
 	@PostMapping(value = "/loginAction")
 	public String loginToUserHome(@Valid @ModelAttribute("login") Login login, Errors errors, Model model, HttpServletRequest request, BindingResult bindingResult,
-												@RequestParam("email") String email, @RequestParam("psw") String psw) {
+								   @RequestParam("email") String email, @RequestParam("psw") String psw) {
 	
 		
 		if (errors.hasErrors()) {
 			
 			return "login";
-		
 		}
 		
 		boolean userExist = serviceLogin.checkLogin(login.getEmail(), login.getPsw());
 	
-		
 		if (userExist) {
 			
 			model.addAttribute("fname", login.getEmail());

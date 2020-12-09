@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,13 @@
 	<link href="css/magnific-popup.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	
-		
+	<spring:url value="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" var="mainCss" />
+	<spring:url value="/resources/css/bootstrap.css" var="mainCss" />
+	<spring:url value="/resources/css/fontawesome-all.css" var="mainCss" />
+	<spring:url value="/resources/css/swiper.css" var="mainCss" />
+	<spring:url value="/resources/css/magnific-popup.css" var="mainCss" />
+	<spring:url value="/resources/css/styles.css" var="mainCss" />
+    
 	<!-- Favicon  -->
     <link rel="icon" href="images/favicon.png">
 

@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.mvc.entity.Register;
 
-
-
 @Repository
 public class RegisterDaoImpl implements RegisterDao {
 

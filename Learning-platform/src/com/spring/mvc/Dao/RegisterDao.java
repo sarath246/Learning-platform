@@ -1,6 +1,5 @@
 package com.spring.mvc.Dao;
 
-
 import java.util.List;
 
 import com.spring.mvc.entity.Register;
